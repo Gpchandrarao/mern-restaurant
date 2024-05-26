@@ -1,0 +1,40 @@
+.menu-heading {
+  color: #68666d;
+  font-weight: 600;
+}
+
+.menu-main-container {
+  margin: 30px 0;
+}
+
+.menu-items-container {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-li-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.menu-images {
+  animation: initialopacity 3s ease-in;
+}
+
+.menuActive {
+  border: 3px solid #f15e30;
+  border-radius: 100%;
+  padding: 1px;
+  background-color: #f15e30;
+}
+
+.menu-li-container p {
+  color: #f15e30;
+  font-size: 15px;
+  font-weight: 900;
+}

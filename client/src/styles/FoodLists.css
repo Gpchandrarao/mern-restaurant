@@ -1,0 +1,105 @@
+.food-list-heading {
+  margin-bottom: 15px;
+  color: #68666d;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.food-list-ul-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px 90px;
+  list-style: none;
+  background-color: #fff;
+}
+.food-list-li-container {
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5),
+    -5px -5px 10px rgba(0, 0, 0, 0.3);
+  height: 420px;
+  border-radius: 30px;
+}
+
+.food-list-img {
+  border-radius: 30px 30px 0px 0px;
+  position: relative;
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.food-list-img:hover {
+  transform: scale(1.03);
+  border-radius: 30px;
+}
+
+.food-list-ul-container p {
+  width: 300px;
+  font-size: 15px;
+  margin-top: -25px;
+  margin-left: 15px;
+  color: #68666d;
+  font-weight: 700;
+}
+
+.food-list-ul-container h1 {
+  color: #f15e30;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0 0 0px 15px;
+}
+
+.food-list-ul-container h4 {
+  position: relative;
+  top: -90px;
+  left: 280px;
+  font-size: 20px;
+  color: #f15e30;
+  background-color: #111;
+  font-weight: 700;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.add-cart-container {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  border-radius: 20px;
+  gap: 0 5px;
+  margin-left: 20px;
+}
+
+.add-cart-container button {
+  width: 150px;
+  height: 25px;
+  border: none;
+  outline: none;
+  text-align: center;
+  border-radius: 15px;
+  font-weight: 800;
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+  background-color: #000;
+  color: #f15e30;
+}
+
+.add-cart-container button:hover {
+  opacity: 0.7;
+}
+
+.add-cart-container h1 {
+  color: #fff;
+  margin-right: 10px;
+  background-color: #111;
+  width: 30px;
+  text-align: center;
+  border-radius: 100%;
+}
