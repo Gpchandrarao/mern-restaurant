@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import image from "/src/assets/logo.jpg";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Register.css";
+import { CartContext } from "../context/CartContext";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -9,13 +10,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState("");
+  const { url } = useContext(CartContext);
   const navegate = useNavigate();
 
   const onsubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = "http://localhost:8000/user/user-register";
-      const formData = {username, email, password}
+      const apiUrl = url + "/user/user-register";
+      const formData = { username, email, password };
       const options = {
         method: "POST",
         body: JSON.stringify(formData),

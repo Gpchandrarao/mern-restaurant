@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import image from "/src/assets/logo.jpg";
 import { useNavigate, Link } from "react-router-dom";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 import "../styles/Login.css";
+import { CartContext } from "../context/CartContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState("");
+  const { url, setToken } = useContext(CartContext);
   const navegate = useNavigate();
 
-
   const successViwe = (token) => {
-    Cookies.set('jwt_token', token, )
-    navegate('/')
-  }
+    setToken(token);
+    localStorage.setItem("token", token);
+    navegate("/");
+  };
 
   const onsubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = "http://localhost:8000/user/user-login";
-      const formData = {email, password}
+      const apiUrl = url + "/user/user-login";
+      const formData = { email, password };
       const options = {
         method: "POST",
         body: JSON.stringify(formData),
@@ -32,7 +34,7 @@ const Login = () => {
       const res = await fetch(apiUrl, options);
       if (res.ok) {
         const data = res.json();
-        successViwe(data.token)
+        successViwe(data.token);
       } else {
         setShowError(data.error);
       }
@@ -43,10 +45,10 @@ const Login = () => {
     }
   };
 
-  // const jwtToken = Cookies.get("jwt_token")
-  // if(jwtToken !== undefined){
-  //   return navegate("/")
-  // }
+  const jwtToken = localStorage.getItem("token");
+  if (jwtToken !== undefined) {
+    return navegate("/");
+  }
   return (
     <div className="login-container">
       <div className="login-items-container">

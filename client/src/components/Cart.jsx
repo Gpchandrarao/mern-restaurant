@@ -6,7 +6,6 @@ import { assets } from "../assets/frontend_assets/assets";
 const Cart = () => {
   const { cart, removeFromCart, getTotalAmount, updateQuantity } =
     useContext(CartContext);
-  // const [counts, setCounts] = useState(cart.map(() => 1));
 
   const increaseCount = (index) => {
     updateQuantity(index, cart[index].quantity + 1);
