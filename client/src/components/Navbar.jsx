@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import searchImg from "../assets/frontend_assets/search_icon.png";
 import basketImg from "../assets/frontend_assets/basket_icon.png";
 import profileImg from "../assets/frontend_assets/profile_icon.png";
 import "../styles/Navbar.css";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
   const [category, setCategory] = useState("home");
   const [show, setShow] = useState(false);
+  const [showCartDout, setShowCartDout] = useState(false);
+
+  const { getTotalAmount } = useContext(CartContext);
+  useEffect(() => {
+    if (getTotalAmount() > 0) {
+      setShowCartDout(true);
+      console.log(getTotalAmount());
+      console.log(showCartDout);
+    } else {
+      setShowCartDout(false);
+    }
+  }, [getTotalAmount()]);
 
   const transitionNavBar = () => {
     if (window.scrollY > 100) {
@@ -53,14 +66,19 @@ const Navbar = () => {
       <div className="profile-container">
         <img src={searchImg} alt="search img" />
         <Link to="/cart" className="link">
-          <img
-            src={basketImg}
-            alt="basket img"
-            onClick={() => setCategory("cart")}
-            className={category === "cart" ? "category-active" : ""}
-          />
+          <div>
+            <img
+              src={basketImg}
+              alt="basket img"
+              onClick={() => setCategory("cart")}
+              className={category === "cart" ? "category-active" : ""}
+            />
+            {showCartDout && <p className="cart-dout"></p>}
+          </div>
         </Link>
-        <img src={profileImg} alt="profile img" />
+        <Link to="/profile" className="link">
+          <img src={profileImg} alt="profile img" />
+        </Link>
       </div>
     </div>
   );

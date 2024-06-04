@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
+import Cookies from "js-cookie";
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [token, setToken] = useState("");
+  const [tokenTrue, setTokenTrue] = useState(false);
 
   const url = "http://localhost:8000";
   const addToCart = (itemPrice, name, image) => {
@@ -29,8 +31,9 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
+    if (Cookies.get("token")) {
+      setToken(Cookies.get("token"));
+      setTokenTrue(true);
     }
   }, []);
 
@@ -45,6 +48,7 @@ export const CartProvider = ({ children }) => {
         url,
         token,
         setToken,
+        tokenTrue,
       }}
     >
       {children}

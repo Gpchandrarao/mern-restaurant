@@ -22,14 +22,13 @@ const userRegister = async (req, res) => {
     });
     await newUser.save();
     res.status(201).json({ mes: "User registered successfully" });
-
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
     console.log(error);
   }
 };
 
-const userLogine = async (req, res) =>{
+const userLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -37,10 +36,7 @@ const userLogine = async (req, res) =>{
     if (!user || !comparePass) {
       return res.status(401).json({ error: "Invalid username or password" });
     }
-    const token = jwt.sign(
-        {userId: user._id},
-      process.env.JWT_SECRET_KEY
-    );
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
 
     res.status(200).json({ sucess: "Login successful", token });
     console.log("email: " + email, "token: " + token);
@@ -48,7 +44,6 @@ const userLogine = async (req, res) =>{
     console.log("error from User Login: " + error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
-
-module.exports = {userRegister, userLogine}
+module.exports = { userRegister, userLogin };

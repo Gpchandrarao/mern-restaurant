@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import image from "/src/assets/logo.jpg";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Register.css";
@@ -10,8 +10,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState("");
-  const { url } = useContext(CartContext);
-  const navegate = useNavigate();
+  const { url, tokenTrue } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (tokenTrue) {
+      navigate("/");
+    }
+  }, [tokenTrue, navigate]);
 
   const onsubmitForm = async (e) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ const Register = () => {
       const res = await fetch(apiUrl, options);
       if (res.ok === true) {
         const data = res.json();
-        navegate("/login");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
@@ -36,6 +42,7 @@ const Register = () => {
       setError(true);
     }
   };
+
   return (
     <div className="register-container">
       <div className="register-items-container">
@@ -43,7 +50,7 @@ const Register = () => {
           <img src={image} className="image-logo" alt="image-logo" />
           <h1 className="logo-name">Restaurant</h1>
         </div>
-        <form className="form-container" onSubmit={onsubmitForm}>
+        <form className="register-form-container" onSubmit={onsubmitForm}>
           <label htmlFor="username" className="label">
             USERNAME
           </label>
@@ -53,7 +60,7 @@ const Register = () => {
             type="text"
             placeholder="Username"
             id="username"
-            className="inptus"
+            className="register-inptus"
             autoFocus
             required
           />
@@ -66,7 +73,7 @@ const Register = () => {
             type="email"
             placeholder="Email"
             id="email"
-            className="inptus"
+            className="register-inptus"
             required
           />
           <label htmlFor="password" className="label">
@@ -78,7 +85,7 @@ const Register = () => {
             type="password"
             placeholder="Password"
             id="password"
-            className="inptus"
+            className="register-inptus"
             required
           />
           <div className="buttons">

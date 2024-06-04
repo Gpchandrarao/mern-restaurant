@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import "../styles/Home.css";
 import Menu from "../components/Menu";
 import FoodLists from "../components/FoodLists";
+import Footer from "./Footer";
 
 const Home = () => {
   return (
@@ -28,6 +29,9 @@ const Home = () => {
         <div>
           <FoodLists />
         </div>
+      </div>
+      <div className="footer-section">
+        <Footer />
       </div>
     </div>
   );
